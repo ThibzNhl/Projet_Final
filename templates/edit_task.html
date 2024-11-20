@@ -1,0 +1,11 @@
+<!-- edit_task.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Modifier la Tâche</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Modifier la tâche</button>
+</form>
+{% endblock %}

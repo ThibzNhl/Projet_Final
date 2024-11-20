@@ -1,0 +1,11 @@
+<!-- add_task.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Ajouter une Tâche</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Ajouter la tâche</button>
+</form>
+{% endblock %}
