@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 from .models import Task
 
 class TaskModelTest(TestCase):
@@ -18,3 +19,9 @@ class TaskModelTest(TestCase):
         task = Task.objects.create(title="Test Task", description="A test task.")
         task.delete()
         self.assertEqual(Task.objects.count(), 0)
+
+    def test_task_list(self):
+        Task.objects.create(title='Test Task')
+        response = self.client.get(reverse('task_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Test Task')
