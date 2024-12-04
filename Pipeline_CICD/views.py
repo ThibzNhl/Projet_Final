@@ -1,11 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import Pipeline
 from .models import Task
 from .forms import TaskForm
-
-def pipeline_list(request):
-    pipelines = Pipeline.objects.all()
-    return render(request, 'pipeline_list.html', {'pipelines': pipelines})
 
 def task_list(request):
     tasks = Task.objects.all()
@@ -38,3 +33,9 @@ def delete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     task.delete()
     return redirect('task_list')  # Redirige vers la liste des tâches après suppression
+
+def toggle_task_status(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    task.status = not task.status  # Inverse le statut
+    task.save()
+    return redirect('task_list')  # Redirige vers la liste des tâches
