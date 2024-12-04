@@ -47,12 +47,29 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Docker Image
+      - name: Build Docker image
         run: |
           docker build -t todolist-app .
+
+      - name: Tag Docker image
+        run: |
           docker tag todolist-app:latest thibnahe/todolist-app:latest
+
+      - name: Push Docker image to Docker Hub
+        run: |
           docker push thibnahe/todolist-app:latest
+
+      - name: Verify Docker image
+        run: |
+          docker images  # Pour s'assurer que l'image a été bien construite
 
       - name: Run Docker Container
         run: |
-          docker run --rm -p 8000:8000 -v $(pwd)/db.sqlite3:/app/db.sqlite3 thibnahe/todolist-app:latest
+          # Exécutez le conteneur en arrière-plan
+          docker run --rm -d -p 8000:8000 -v $(pwd)/db.sqlite3:/app/db.sqlite3 thibnahe/todolist-app:latest
+          
+          # Ajoutez un délai pour que le serveur démarre
+          sleep 10
+
+          # Testez si l'application est en ligne (vérifiez si le serveur répond sur le port 8000)
+          curl --fail http://localhost:8000 || exit 1
