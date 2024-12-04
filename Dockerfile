@@ -10,7 +10,6 @@ COPY . /app/
 # Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN python manage.py makemigrations
 # Étape 5 : Exposer le port que Django utilise
 EXPOSE 8000
 
