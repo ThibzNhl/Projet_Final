@@ -49,10 +49,10 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t  todolist-app .
-          docker tag todolist-app:latest thibnahe/todolist-app:latest
-          docker push thibnahe/todolist-app:latest
+          docker build -t todolist-app .
+          docker tag todolist-app:latest /todolist-app:latest
+          docker push todolist-app:latest
 
       - name: Run Docker Container
         run: |
-          docker run --rm -p 8000:8000 thibnahe/todolist-app:latest
+          docker run --rm -p 8000:8000 todolist-app:latest
