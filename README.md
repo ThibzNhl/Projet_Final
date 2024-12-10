@@ -7,7 +7,7 @@ Pipeline CI/CD : Chaque fois qu'une nouvelle fonctionnalité est ajoutée (comme
   
 **Étapes du pipeline :**  
 Test unitaire : Test des opérations CRUD (Create, Read, Update, Delete) sur les tâches.  
-Build Docker : Création d'une image Docker pour l'application Flask.  
+Build Docker : Création d'une image Docker pour l'application.  
 Déploiement automatique : Déploiement de l'application sur un serveur distant après validation des tests.  
 
 
@@ -19,10 +19,8 @@ http://localhost:8000/admin/
 id: admin   
 mot de passe: admin  
 
+pull la version la plus récente:  
+docker pull thibnahe/todolist-app:latest
 
-créer l'image Docker en local avec la commande :  
-docker build -t my-django-app .  
-
-pour tester l’application en local avec Docker:   
-docker run -p 8000:8000 my-django-app  
-
+run : docker compose up -d  
+stop : docker compose down
